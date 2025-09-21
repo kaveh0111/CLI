@@ -43,16 +43,7 @@ void loopFunction()
                 std::perror("read");
                 break;
             }
-             if (r == 3) {
-                std::cout << "you pushed an arrow key";   
-                if (input_char_sequence[0] != 0x1B && input_char_sequence[0] != 0x5B)
-                {
-                    std::cout << input_char_sequence[1] << "anddddddddddddddddddd" << input_char_sequence[2];
-                    std::perror("invalid input");
-                    break;
-                }
-                
-             }
+             
             const unsigned char ch = input_char_sequence[0];
             //std::cout << "I am getchar";
             
@@ -60,8 +51,43 @@ void loopFunction()
             {
             case 0x1B:
             {
+                if (r == 3) {
+                std::cout << "you pushed an arrow key";   
+                if (input_char_sequence[1] == 0x5B)
+                {
+                    switch(input_char_sequence[2])
+                    {
+                        case 0x41:
+                            {
+                                std::cout << "UP arrow \n";
+                                break;
+                            }
+                        case 0x42:
+                            {
+                                std::cout << "DOWN arrow \n";   
+                                break;
+                            }
+                        case 0x44:
+                            {
+                                std::cout << "LEFT arrow \n";   
+                                break;
+                            }
+                        case 0x43:
+                            {
+                                std::cout << "RIGHT arrow \n";   
+                                break;
+                            }
+                    }
+                    //std::cout << input_char_sequence[1] << "anddddddddddddddddddd" << input_char_sequence[2];
+                    //std::perror("invalid input");
+                    break;
+                }
+                
+             }
+             else{
                 std::cout << " \n[exit]\n";
                 return;
+             }
             }
             case 0x9:
             {
